@@ -28,4 +28,5 @@ install:
 
 script:
   # Your tests script goes here
+  - pwd
   - python -m unittest discover ./app/app/tests
