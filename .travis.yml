@@ -46,6 +46,7 @@ jobs:
         - docker build -t $REPO/$IMAGE:latest -t $REPO/$IMAGE:$VERSION .
         - docker push $REPO/$IMAGE:latest
         - docker push $REPO/$IMAGE:$VERSION
+        - python -m unittest discover .
     - stage: test
       script:
         - pwd
