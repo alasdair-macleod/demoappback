@@ -25,7 +25,7 @@ install:
 jobs:
   include:
     - stage: build
-      if: branch = master
+      if: branch = VER3-393_build
       script:
         - pwd
     - stage: test
