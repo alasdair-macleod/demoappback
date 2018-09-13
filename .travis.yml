@@ -28,3 +28,6 @@ jobs:
       script:
         - pwd
         - python -m unittest discover .
+    - stage: build
+      script:
+        - pwd
