@@ -43,6 +43,7 @@ jobs:
         - sudo -H pip install awscli --upgrade --ignore-installed six
         - export PATH=~/.local/bin:$PATH
         - mkdir -p ~/.aws
+        - chmod 600 scripts/ecr_user.sh
         - ./scripts/ecr_user.sh
         - eval $(aws ecr get-login --no-include-email --region us-east-1)
         - VERSION=0.0.1
