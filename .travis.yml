@@ -25,7 +25,7 @@ install:
 jobs:
   include:
     - stage: build
-      if: branch = VER3-393_build
+      if: env(TAG_ENABLE) IN ("True", "true")
       script:
         - pwd
     - stage: test
