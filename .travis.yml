@@ -26,6 +26,9 @@ install:
 - conda create -q -n tests-environment python=$TRAVIS_PYTHON_VERSION scipy
 - source activate tests-environment
 - python setup.py install
-script:
-- pwd
-- python -m unittest discover .
+jobs:
+include:
+  - stage: test
+    script:
+    - pwd
+    - python -m unittest discover .
