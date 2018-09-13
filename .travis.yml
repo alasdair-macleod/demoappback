@@ -27,8 +27,8 @@ install:
 - source activate tests-environment
 - python setup.py install
 jobs:
-include:
-  - stage: test
-    script:
-    - pwd
-    - python -m unittest discover .
+  include:
+    - stage: test
+      script:
+      - pwd
+      - python -m unittest discover .
