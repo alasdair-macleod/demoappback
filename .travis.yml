@@ -49,7 +49,7 @@ jobs:
         - mkdir -p ~/.aws
         - ./scripts/ecr_user.sh
         - eval $(aws ecr get-login --no-include-email --region us-east-1)
-        - VERSION=$(node -e "console.log(require('./package.json').version)")
+        - VERSION=0.0.1
         - docker build -t $REPO/$IMAGE:latest -t $REPO/$IMAGE:$VERSION .
         - docker push $REPO/$IMAGE:latest
         - docker push $REPO/$IMAGE:$VERSION
