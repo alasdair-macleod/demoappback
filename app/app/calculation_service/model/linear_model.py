@@ -55,6 +55,7 @@ class LinearModel(object):
         self.hypothesis_sum_square = None
         self.nu_e = None
         self.calc_metadata()
+        self.error_message = ''
 
         if kwargs.get('study_design'):
             self.from_study_design(kwargs['study_design'])
@@ -112,10 +113,14 @@ class LinearModel(object):
         return study_design.isu_factors.smallest_group_size
 
     def calculate_c_matrix(self, predictors):
-        partials = [self.calculate_partial_c_matrix(p) for p in predictors if p.in_hypothesis]
-        partials.append(np.matrix(np.identity(1)))
-        c_matrix = kronecker_list(partials)
-        return c_matrix
+        try:
+            partials = [self.calculate_partial_c_matrix(p) for p in predictors if p.in_hypothesis]
+            partials.append(np.matrix(np.identity(1)))
+            c_matrix = kronecker_list(partials)
+            return c_matrix
+        except Exception as e:
+            self.error_message += type(e).__name__+ ': ' + str(e) + '\n'
+            print(self.error_message)
 
     @staticmethod
     def calculate_u_matrix(isu_factors):
@@ -132,6 +137,7 @@ class LinearModel(object):
     def calculate_partial_c_matrix(self, predictor):
         partial = None
         if predictor.in_hypothesis:
+            print(predictor.hypothesis_type)
             if predictor.hypothesis_type == HypothesisType.GLOBAL_TRENDS:
                 partial = self.calculate_main_effect_partial_c_matrix(predictor)
             if predictor.hypothesis_type == HypothesisType.IDENTITY:
@@ -161,6 +167,7 @@ class LinearModel(object):
     def calculate_polynomial_partial_c_matrix(predictor):
         values = None
         no_groups = len(predictor.values)
+        print('no_groups', no_groups)
         if no_groups < 2:
             warnings.warn('You have less than 2 valueNames in your main effect. This is not valid.')
         elif no_groups == 2:

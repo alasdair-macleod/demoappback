@@ -50,14 +50,21 @@ def calculate():
         results = calculate_power(model, scenario)
     else:
         results = calculate_sample_size(model, scenario)
-    json_response = json.dumps(dict(message='OK',
+
+    if model.error_message == '':
+        results = {'ERROR':'ERROR'}
+        message = model.error_message
+    else:
+        message = 'OK'
+
+    json_response = json.dumps(dict(message=message,
                                     status=200,
                                     mimetype='application/json',
                                     results=results,
                                     model=model.to_dict()))
 
-    return json_response
 
+    return json_response
 
 def calculate_sample_size(model, scenario):
     results = []
