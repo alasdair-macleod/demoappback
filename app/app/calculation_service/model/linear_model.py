@@ -55,7 +55,7 @@ class LinearModel(object):
         self.hypothesis_sum_square = None
         self.nu_e = None
         self.calc_metadata()
-        self.error_message = ''
+        self.errors = []
 
         if kwargs.get('study_design'):
             self.from_study_design(kwargs['study_design'])
@@ -287,7 +287,8 @@ class LinearModel(object):
                    m = utilities.serialise_matrix(self.m),
                    nu_e = self.nu_e,
                    hypothesis_sum_square = utilities.serialise_matrix(self.hypothesis_sum_square),
-                   error_sum_square = utilities.serialise_matrix(self.error_sum_square))
+                   error_sum_square = utilities.serialise_matrix(self.error_sum_square),
+                   errors = self.errors)
         return ret
 
     def serialize(self):
