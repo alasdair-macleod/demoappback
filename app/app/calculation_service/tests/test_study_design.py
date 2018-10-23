@@ -158,10 +158,37 @@ class StudyDesignTestCase(unittest.TestCase):
                                                      error_sum_square,
                                                      hypothesis_sum_square,
                                                      tolerance=deliberately_fail_tolerance)
+
         self.assertEqual(np.isnan(actual.power), True)
         self.assertEqual(np.isnan(actual.noncentrality_parameter), True)
         self.assertEqual(actual.fmethod, Constants.FMETHOD_MISSING)
         self.assertEqual(actual.error_message,'Power is missing because because the noncentrality could not be computed.')
+
+    def test_warning_pbt_two_moment_null_approx_obrien_shieh(self):
+        """Should throw an warning"""
+
+        rank_C = 3
+        rank_U = 2
+        rank_X = 4
+        total_N = 20
+        error_sum_square = np.matrix([[9.59999999999999000000000000, 0.000000000000000444089209850],
+                                      [0.000000000000000444089209850, 9.59999999999999000000000000]])
+        hypothesis_sum_square = np.matrix([[1.875, 1.08253175473054], [1.08253175473054, 0.625]])
+        alpha = 0.05
+        deliberately_fail_tolerance = 100
+
+        actual = multirep.pbt_two_moment_null_approx_obrien_shieh(rank_C,
+                                                     rank_U,
+                                                     rank_X,
+                                                     total_N,
+                                                     alpha,
+                                                     error_sum_square,
+                                                     hypothesis_sum_square,
+                                                     tolerance=deliberately_fail_tolerance)
+        self.assertEqual(np.isnan(actual.power), True)
+        self.assertEqual(np.isnan(actual.noncentrality_parameter), True)
+        self.assertEqual(actual.fmethod, Constants.FMETHOD_MISSING)
+        self.assertEqual(actual.error_message, 'Power is missing because because the min_rank_C_U - v  <= 0.')
 
 
 if __name__ == '__main__':
