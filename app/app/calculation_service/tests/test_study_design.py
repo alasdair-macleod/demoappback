@@ -138,7 +138,7 @@ class StudyDesignTestCase(unittest.TestCase):
 
 
     def test_warning_wlk_two_moment_null_approx(self):
-        """Should throw an warning"""
+        """Should return undefined power an error messages"""
 
         rank_C = 3
         rank_U = 2
@@ -165,7 +165,7 @@ class StudyDesignTestCase(unittest.TestCase):
         self.assertEqual(actual.error_message,'Power is missing because because the noncentrality could not be computed.')
 
     def test_warning_pbt_two_moment_null_approx_obrien_shieh(self):
-        """Should throw an warning"""
+        """Should return undefined power an error messages"""
 
         rank_C = 3
         rank_U = 2

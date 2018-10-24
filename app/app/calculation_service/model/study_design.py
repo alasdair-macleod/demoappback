@@ -73,7 +73,7 @@ class StudyDesign:
             return True
 
     def load_from_json(self, json_str: str):
-        return json.loads(json_str.decode('utf-8'), cls=StudyDesignDecoder)
+        return json.loads(json_str, cls=StudyDesignDecoder)
 
     def calculate_c_matrix(self):
         """Calculate the C Matrix from the hypothesis"""
