@@ -188,7 +188,7 @@ class StudyDesignTestCase(unittest.TestCase):
         self.assertEqual(np.isnan(actual.power), True)
         self.assertEqual(np.isnan(actual.noncentrality_parameter), True)
         self.assertEqual(actual.fmethod, Constants.FMETHOD_MISSING)
-        self.assertEqual(actual.error_message, 'Power is missing because because the min_rank_C_U - v  <= 0.')
+        self.assertEqual(actual.error_message, 'Power is missing because df2 or eval_HINVE is not valid.')
 
 
 if __name__ == '__main__':
